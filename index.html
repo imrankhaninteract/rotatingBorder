@@ -1,0 +1,92 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <!-- Meta information -->
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <!-- Title of the page -->
+  <title>Rotating Border</title>
+  <!-- Internal CSS styling -->
+  <style>
+    /* Styling for the entire webpage */
+    body {
+      /* Background image */
+      background-image: url("https://images.unsplash.com/photo-1518476922075-fec9281177ca?q=80&w=1941&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D");
+      color: #eee; /* Text color */
+      padding: 130px 0 20px; /* Padding around the content */
+      text-align: center; /* Aligning text to the center */
+      background-size: cover; /* Cover the entire background */
+      height: 100vh; /* Set the height of the body to the full viewport height */
+    }
+
+    /* Styling for the main content */
+    main {
+      display: flex; /* Display as flex container */
+      justify-content: center; /* Center the content horizontally */
+      gap: 20px; /* Gap between elements */
+      margin: 40px 0; /* Margin around the content */
+      flex-wrap: wrap; /* Wrap content if necessary */
+    }
+
+    /* Styling for the rotating div element */
+    div {
+      min-width: 600px; /* Minimum width of the div */
+      height: 100px; /* Height of the div */
+      position: relative; /* Positioning relative to its normal position */
+      border-radius: 50px; /* Rounded border */
+      cursor: pointer; /* Cursor type */
+    }
+
+    /* Styling for the overlay effect */
+    div:hover::after,
+    #toggle:checked ~ main div::after {
+      opacity: 0.5; /* Opacity when hovering or when checkbox is checked */
+    }
+
+    /* Styling for the overlay shape */
+    div::after {
+      content: ""; /* Empty content */
+      display: block; /* Display as block */
+      position: absolute; /* Positioning absolute */
+      background: #111; /* Background color */
+      inset: 5px; /* Positioning inside the div */
+      border-radius: 45px; /* Rounded border */
+      z-index: 1; /* Stack order */
+      transition: opacity 0.3s ease; /* Transition effect for opacity */
+    }
+
+    /* Custom property for rotation angle */
+    @property --r {
+      syntax: "<angle>"; /* Syntax for the property */
+      inherits: false; /* Does not inherit */
+      initial-value: 0deg; /* Initial value of the angle */
+    }
+
+    /* Styling for div 'a' with conic gradient and animation */
+    #a {
+      background: conic-gradient(from var(--r), #222 0%, #eee 10%, #222 20%); /* Conic gradient background */
+      animation: rotating 3s linear infinite; /* Rotation animation */
+    }
+
+    /* Keyframes for the rotation animation */
+    @keyframes rotating {
+      0% {
+        --r: 0deg; /* Starting angle */
+      }
+      100% {
+        --r: 360deg; /* Ending angle */
+      }
+    }
+  </style>
+</head>
+<body>
+  <!-- Checkbox to toggle overlay -->
+  <input type="checkbox" id="toggle" name="toggle" />
+  <label for="toggle">Hide the overlay to see what's inside</label>
+  <!-- Main content -->
+  <main>
+    <!-- Div element with ID 'a' for rotation -->
+    <div id="a"></div>
+  </main>
+</body>
+</html>
